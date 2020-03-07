@@ -1,0 +1,13 @@
+setup.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
+pttCrawler/__init__.py
+pttCrawler/items.py
+pttCrawler/middlewares.py
+pttCrawler/pipelines.py
+pttCrawler/settings.py
+pttCrawler/spiders/__init__.py
+pttCrawler/spiders/ptt.py
