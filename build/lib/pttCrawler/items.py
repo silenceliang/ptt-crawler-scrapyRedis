@@ -16,6 +16,7 @@ class PostItem(scrapy.Item):
     canonicalUrl = scrapy.Field()
     createdTime = scrapy.Field()
     updateTime = scrapy.Field()
+    board = scrapy.Field()
 
 
 class AuthorItem(scrapy.Item):
@@ -26,5 +27,6 @@ class CommentItem(scrapy.Item):
     commentId = scrapy.Field()
     commentContent = scrapy.Field()
     commentTime = scrapy.Field()
+    board = scrapy.Field()
 
     

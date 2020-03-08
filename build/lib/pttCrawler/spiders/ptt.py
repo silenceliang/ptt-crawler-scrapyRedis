@@ -1,10 +1,10 @@
-from pttCrawler.items import PostItem, AuthorItem, CommentItem
 import scrapy
-import time, datetime, logging
 from scrapy_redis.spiders import RedisSpider
 from scrapy.utils.log import configure_logging  
 from scrapy.exceptions import CloseSpider
+from pttCrawler.items import PostItem, AuthorItem, CommentItem
 from datetime import datetime
+import time, logging
 
 '''
 Scrapy >> Spider >> RedisSpider
@@ -25,6 +25,7 @@ class PTTspider(RedisSpider):
     '''
     name = 'ptt'
     redis_key = 'ptt:start_urls'
+    board = None
 
     def __init__(self, start=None, end=None, *args, **kwargs):
         m_d_start = [int(x) for x in start.split('/')]
@@ -38,7 +39,10 @@ class PTTspider(RedisSpider):
 
     def parse(self, response):
         logging.info('Crawling first page, we crawl the index of ptt: {}'.format(response.request.url))
+        # e.g., response.request.url = https://www.ptt.cc/bbs/Soft_Job/index.html
         
+        self.board = response.request.url.split('/')[-2]
+
         yield scrapy.Request(response.request.url, 
             cookies={'over18':1}, # To collect data from sex or Gossiping board.
             callback=self.parse_article,
@@ -77,7 +81,8 @@ class PTTspider(RedisSpider):
 
         yield author_item
 
-        comment_item = CommentItem()        
+        comment_item = CommentItem() 
+        comment_item['board'] = self.board
         target = response.css("div.push")
         for tag in target:
             try:
@@ -92,6 +97,7 @@ class PTTspider(RedisSpider):
     def parse_article(self, response):
         # create a post-object to store results
         post_item = PostItem()
+        post_item['board'] = self.board
         # create a author-object to store results
         author_item = AuthorItem()    
         # define the next page url
