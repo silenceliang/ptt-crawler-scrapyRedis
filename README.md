@@ -1,4 +1,5 @@
 # pttCrawler
+In this project we try to collect data from the ptt website. We adopt scrapy framework based on python language and use mongoDB as our storage. However, crawler handles it job only on single machine. To explore efficently, scrapy-redis provides distributed mechanism that helps us running spider on clients. For the purpose of deployment, we use scrapyd to achieve it. 
 
 ## Dependencies
 - **Python 3** (tested on python 3.7.2)
