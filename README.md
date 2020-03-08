@@ -37,7 +37,13 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 * where `{board}` can be described Soft_Job, Gossiping or etc.
 
 ## SnapShot
+
+### Result
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
+
+### terminal
+![terminal setup](/assets/img/Screenshot%20from%202020-03-08%2015-23-32.png?raw=true "terminal")
+
 
 ## Collections 
 There are three collections in mongoDB:
