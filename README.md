@@ -189,14 +189,14 @@ def process_item(self, item, spider):
 ## Security Methodology
 To avoid getting banned, we adopt some tricks while we are crawling web pages.
 1. **Download delays**
-We set the `DOWLOAD_DELAY` in `setting.py` to limit the dowmload behavior. 
+> We set the `DOWLOAD_DELAY` in `setting.py` to limit the dowmload behavior. 
 
 2. **Distrbuted downloader**
-scrapy-redis has already helped us indeed.
+> scrapy-redis has already helped us indeed.
 
 3. **User Agent Pool**
-Randomly choose one user-agent through middleware. 
-
+> Randomly choose one user-agent through middleware. 
+<br><br>
 **Note**: we cannot disable cookies because we have to pass the 'over18' message to some ptt boards. 
 
 ## Supplement
