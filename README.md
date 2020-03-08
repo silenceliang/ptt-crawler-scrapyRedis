@@ -1,5 +1,20 @@
 # pttCrawler
 
+## Dependencies
+- **Python 3** (tested on python 3.7.2)
+- **redis 3.4.1**
+- **pymongo 3.10.1**
+- **Scrapy 2.0.0**
+- **scrapy-redis 0.6.8**
+- **scrapyd 1.2.1**
+- **scrapyd-client 1.1.0**
+
+
+- [gensim](https://github.com/RaRe-Technologies/gensim)
+- [cytoolz](https://github.com/pytoolz/cytoolz)
+- [tensorboardX](https://github.com/lanpa/tensorboard-pytorch)
+- [pyrouge](https://github.com/bheinzerling/pyrouge) (for evaluation)
+
 ## SnapShot
 
 ## Schema design
