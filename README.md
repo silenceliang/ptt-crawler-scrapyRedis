@@ -11,6 +11,8 @@
 
 ## SnapShot
 
+
+
 ## Schema design
 
 ### Post
@@ -40,7 +42,7 @@
 
 ## Scrapy-Redis Framework
 
-### Distributed crawling
+### Distributed crawler
 
 - master-slaver architecture
 
@@ -52,11 +54,11 @@ scrapy crawl pttCrawl
 ```bash
 redis-cil
 ```
-3. the most important step is to push your url that you attempt to crawl. Here, we use `lpush` to attain this goal. The follwing term `pttCrawl:start_urls` is the redis key we have assigned to our spider.
+3. the most important step is to push your url that you attempt to crawl. Here, we use `lpush` to attain this goal. The following redis key is `pttCrawl:start_urls`. We push urls to redis.
 ```bash
 lpush pttCrawl:start_urls {ptt url}
 ```
-4. wake our slaver machines up which have a little bit different declaration in `setting.py`:
+4. (optimal) wake our slaver machines up which have a little bit different declaration in `setting.py`:
 ```bash
 scrapy crawl pttCrawl
 ```
