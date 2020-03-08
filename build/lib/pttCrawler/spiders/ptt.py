@@ -26,14 +26,14 @@ class PTTspider(RedisSpider):
     name = 'ptt'
     redis_key = 'ptt:start_urls'
     board = None
-
+    year = 2020
+    maximum_missing_count = 500
+    
     def __init__(self, start=None, end=None, *args, **kwargs):
         m_d_start = [int(x) for x in start.split('/')]
         m_d_end = [int(x) for x in end.split('/')]
-        self.year = 2020
         self.start = datetime(self.year, m_d_start[0], m_d_start[1])
         self.end = datetime(self.year, m_d_end[0], m_d_end[1])
-        self.maximum_missing_count = 500
         super(PTTspider, self).__init__(*args, **kwargs)
         logging.debug('\n\nCrawling articles from  {} to {}\n\n.'.format(start, end))
 
