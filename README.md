@@ -57,6 +57,7 @@ There are three collections in mongoDB:
 | content | content in the article |
 | publishedTime | the date this post was created |
 | updateTime | the date this post was updated |
+| board | what post belong with in ptt |
 
 ### Author
 | schema | Description |
@@ -70,6 +71,7 @@ There are three collections in mongoDB:
 | commentId |  who post the conmment |
 | commentTime | when user posted |
 | commentContent | the content in comment |
+| board | what comment belong with in ptt |
 
 **Note**: where schema prefix * represents primary key
 
@@ -125,8 +127,28 @@ scrapyd-deploy pttCrawler
 ## Pipeline
 * DuplicatesPipeline
 > In case of dumplicates in database, we filter the data here.
+```python
+def process_item(self, item, spider):
+
+    if isinstance(item, PostItem):
+        logging.debug("filter duplicated post items.")
+        if item['canonicalUrl'] in self.post_set:
+            raise DropItem("Duplicate post found:%s" % item)
+        self.post_set.add(item['canonicalUrl'])
+
+    elif isinstance(item, AuthorItem):
+        logging.debug("filter duplicated author items.")
+        if item['authorId'] in self.author_set:
+            raise DropItem("Duplicate author found:%s" % item)
+        self.author_set.add(item['authorId'])
+
+    return item
+```
+
 * MongoPipeline
-> save data in database. 
+> save data in mongodb. 
+
+
 * JsonPipeline
 > generate a json file.
 
