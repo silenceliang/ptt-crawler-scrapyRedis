@@ -41,10 +41,12 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
 ## Collections 
-There are three collections:
+There are three collections in mongoDB:
 * Post
 * Author
 * Comment
+
+----
 
 ### Post
 | schema | Description |
@@ -69,7 +71,9 @@ There are three collections:
 | commentTime | when user posted |
 | commentContent | the content in comment |
 
-**Note**: where schema prefix $^*$ represents primary key
+**Note**: where schema prefix * represents primary key
+
+----
 
 ## Scrapy-Redis Framework
 
