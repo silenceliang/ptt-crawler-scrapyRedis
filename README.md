@@ -10,6 +10,33 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
 - **scrapyd 1.2.1** (provide a crawling daemon )
 - **scrapyd-client 1.1.0** (used to deploy our spider)
 
+## Usage
+
+### 0) running spider by following command: 
+```bash
+scrapy crawl ptt -a start={m/d} -a end={m/d}
+```
+* where `-a` received an argument that is a parameter to the spider.<br>
+* {m/d} means **month / day** such as 3/5, which is March 5th.<br> For example, the command would be `scrapy crawl ptt -a start=3/5 -a end=3/8`
+
+### 1) Start the redis server and get in terminal
+```bash
+redis-cli
+```
+
+### 2) Before crawling, we need to obtain the authentication by specific keyword 
+```bash
+auth yourpassword
+```
+* where yourpassword is in `setting.py` and it can be modified directly.
+
+### 3) Push url to redis and running Crawler
+```bash
+lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
+```
+* where {board} can be described Soft_Job, Gossiping or etc.
+
+
 ## SnapShot
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
