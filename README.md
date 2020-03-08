@@ -187,7 +187,7 @@ def process_item(self, item, spider):
 ## Supplement
 
 In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
-Also, we set `maximum_missing_count` as 500 where aims to control the bound of exploring articles. If there has been no page can be visited or got the limit of our missing count, we then stop crawling and wait for the next request.
+Also, we set `maximum_missing_count` as 500 where aims to control the bound of exploring articles. If there has been no page can be visited or got the limit of our missing count, we then stop crawling so that waste less resource.
 
 ```python
 class PTTspider(RedisSpider):
@@ -199,7 +199,8 @@ class PTTspider(RedisSpider):
     name = 'ptt'
     redis_key = 'ptt:start_urls'
     board = None
-    year = 200
+    ## where are restrictions
+    year = 2020
     maximum_missing_count = 500
 ```
 
