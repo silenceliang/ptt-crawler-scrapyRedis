@@ -1,8 +1,13 @@
 # pttCrawler
 In this project we try to collect data from the ptt website. We adopt scrapy framework based on python language and use mongoDB as our storage. However, crawler handles it job only on single machine. To explore efficently, scrapy-redis provides distributed mechanism that helps us running spider on clients. For the purpose of deployment, we use scrapyd to achieve it. 
-- [pttCrawler](#pttcrawler)
+
+-[pttCrawler](#pttcrawler)
   * [Dependencies](#dependencies)
   * [Requirements](#requirements)
+  * [Setup](#setup)
+    + [mongodb settings](#mongodb-settings)
+    + [redis settings](#redis-settings)
+    + [(Optional) filter duplicates](#-optional--filter-duplicates)
   * [Usage](#usage)
     + [Running spider by following command:](#running-spider-by-following-command-)
     + [Start the redis server and get in terminal](#start-the-redis-server-and-get-in-terminal)
@@ -25,8 +30,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [DuplicatesPipeline](#duplicatespipeline)
     + [MongoPipeline](#mongopipeline)
     + [JsonPipeline](#jsonpipeline)
-  * [Security-Methodology](#Security-Methodology)
-  
+  * [Security Methodology](#security-methodology)
   * [Supplement](#supplement)
   * [Reference](#reference)
 
@@ -42,6 +46,30 @@ Full dependency installation on Ubuntu 16.04
 - **scrapyd 1.2.1** (provide a crawling daemon )
 - **scrapyd-client 1.1.0** (used to deploy our spider)
 
+## Setup
+
+### mongodb settings
+In `settings.py`, we should define the mongodb settings:
+```python
+## in settings.py
+MONGO_URI = 'mongodb://localhost:27017'
+MONGO_DATABASE = 'ptt-sandbox'
+```
+
+### redis settings
+```python
+## in settings.py
+EDIS_HOST = 'localhost'
+REDIS_PARAMS = {
+    'password':'yourpassword'
+}
+REDIS_PORT = 6379
+```
+
+### (Optional) filter duplicates
+```python
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+```
 ## Usage
 
 ### Running spider by following command: 
@@ -60,7 +88,7 @@ redis-cli
 ```bash
 auth yourpassword
 ```
-* where yourpassword is in `setting.py` and it can be modified directly.
+* where yourpassword is in `settings.py` and it can be modified directly.
 
 ### Push url to redis and running Crawler
 ```bash
@@ -110,8 +138,6 @@ There are three collections in mongoDB:
 
 **Note**: where schema prefix * represents primary key.
 
-----
-
 ## Scrapy-Redis Framework
 
 ### Distributed crawler
@@ -130,7 +156,7 @@ redis-cil
 ```bash
 lpush pttCrawl:start_urls {ptt url}
 ```
-4. (optimal) wake our slaver machines up which have a little bit different declaration in `setting.py`:
+4. (optimal) wake our slaver machines up which have a little bit different declaration in `settings.py`:
 ```bash
 scrapy crawl pttCrawl
 ```
@@ -138,13 +164,18 @@ scrapy crawl pttCrawl
 ### Benefits
 
 #### filter duplicates
-In `setting.py`, we just add a line that would prevent from repetitive redirection:
+In `settings.py`, we just add a line that would prevent from repetitive redirection:
 ```
+## in settings.py
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 ```
 #### scheduler persist
-In `setting.py`, we just add a line that can keep tracking processes of the crawler. As requests in the redis queue just exist after crawling process stopped. It make convenient start to crawl again. 
+In `settings.py`, we just add a line that can keep tracking processes of the crawler. As requests in the redis queue just exist after crawling process stopped. It make convenient start to crawl again. 
 ```
+## in settings.py
+# Enable scheduling storing requests queue in redis
+SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
+# Start from the last endpoint
 SCHEDULER_PERSIST = True
 ```
 
@@ -189,14 +220,36 @@ def process_item(self, item, spider):
 ## Security Methodology
 To avoid getting banned, we adopt some tricks while we are crawling web pages.
 1. **Download delays**
-> We set the `DOWLOAD_DELAY` in `setting.py` to limit the dowmload behavior. 
-
+> We set the `DOWLOAD_DELAY` in `settings.py` to limit the dowmload behavior. 
+```python
+## in settings.py
+DOWNLOAD_DELAY = 2
+```
 2. **Distrbuted downloader**
 > scrapy-redis has already helped us indeed.
 
 3. **User Agent Pool**
 > Randomly choose one user-agent through middleware. 
 <br><br>
+```python
+## in middlewares.py
+class RandomUserAgentMiddleware(object):
+
+    def process_request(self, request, spider):
+        agent = random.choice(list(UserAgentList))
+        request.headers['User-Agent'] = agent
+```
+```python
+## in settings.py
+UserAgentList = [
+    'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1500.55 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17'
+]
+DOWNLOADER_MIDDLEWARES = {
+    'pttCrawler.middlewares.RandomUserAgentMiddleware': 543,
+}
+```
+
 **Note**: we cannot disable cookies because we have to pass the 'over18' message to some ptt boards. 
 
 ## Web UI for scrapyd server
