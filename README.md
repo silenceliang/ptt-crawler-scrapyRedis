@@ -1,32 +1,48 @@
 # pttCrawler
 
+## Dependencies
+- **Python 3** (tested on python 3.7.2)
+- **redis 3.4.1** (for cached memory)
+- **pymongo 3.10.1** (used nosql db)
+- **Scrapy 2.0.0** (framework of crawler)
+- **scrapy-redis 0.6.8** (achieve distributed scrawling)
+- **scrapyd 1.2.1** (provide a crawling daemon )
+- **scrapyd-client 1.1.0** (used to deploy our spider)
+
 ## SnapShot
+
+
 
 ## Schema design
 
 ### Post
-* *canonicalUrl
-* authorId
-* title
-* publishedTime
-* content
-* createdTime
-* updateTime
+| schema | Description |
+| --- | --- |
+| *canonicalUrl | url where the page visited |
+| authorId | who post the article |
+| title | title in the article |
+| content | content in the article |
+| publishedTime | the date this post was created |
+| updateTime | the date this post was updated |
 
 ### Author
-* *authorId
-* authorName
+| schema | Description |
+| --- | --- |
+| *authorId | who post the article |
+| authorName | the author's nickname |
 
 ### Comment
-* commentId
-* commentTime
-* commentContent
+| schema | Description |
+| --- | --- |
+| commentId |  who post the conmment |
+| commentTime | when user posted |
+| commentContent | the content in comment |
 
 **Note**: where schema prefix $^*$ represents primary key
 
 ## Scrapy-Redis Framework
 
-### Distributed crawling
+### Distributed crawler
 
 - master-slaver architecture
 
@@ -38,11 +54,11 @@ scrapy crawl pttCrawl
 ```bash
 redis-cil
 ```
-3. the most important step is to push your url that you attempt to crawl. Here, we use `lpush` to attain this goal. The follwing term `pttCrawl:start_urls` is the redis key we have assigned to our spider.
+3. the most important step is to push your url that you attempt to crawl. Here, we use `lpush` to attain this goal. The following redis key is `pttCrawl:start_urls`. We push urls to redis.
 ```bash
 lpush pttCrawl:start_urls {ptt url}
 ```
-4. wake our slaver machines up which have a little bit different declaration in `setting.py`:
+4. (optimal) wake our slaver machines up which have a little bit different declaration in `setting.py`:
 ```bash
 scrapy crawl pttCrawl
 ```
