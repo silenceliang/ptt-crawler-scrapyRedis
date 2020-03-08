@@ -31,6 +31,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [MongoPipeline](#mongopipeline)
     + [JsonPipeline](#jsonpipeline)
   * [Security Methodology](#security-methodology)
+  * [Web UI for scrapyd server](#Web-UI-for-scrapyd-server)
   * [Supplement](#supplement)
   * [Reference](#reference)
 
@@ -40,11 +41,12 @@ Full dependency installation on Ubuntu 16.04
 - **redis 3.4.1** 
 
 ## Requirements
-- **pymongo 3.10.1** (used nosql db)
-- **Scrapy 2.0.0** (framework of crawler)
-- **scrapy-redis 0.6.8** (achieve distributed scrawling)
-- **scrapyd 1.2.1** (provide a crawling daemon )
-- **scrapyd-client 1.1.0** (used to deploy our spider)
+- **pymongo==3.10.1** (used nosql db)
+- **Scrapy==2.0.0** (framework of crawler)
+- **scrapy-redis==0.6.8** (achieve distributed scrawling)
+- **scrapyd==1.2.1** (provide a crawling daemon )
+- **scrapyd-client==1.1.0** (used to deploy our spider)
+- **scrapyd-web==1.4.0*** (show the UI for the crawler)
 
 ## Setup
 
@@ -263,8 +265,15 @@ Then running it by following command:
 ```bash
 scrapydweb
 ```
-
 We can get in from `localhost:5000` and monitor our crawler.
+
+![monitor1](/assets/img/Screenshot from 2020-03-08 23-15-49.png?raw=true "web UI")
+
+Also, we can track the crawler in here.
+![monitor2](/assets/img/Screenshot from 2020-03-08 23-09-23.png?raw=true "log1")
+
+![monitor3](/assets/img/Screenshot from 2020-03-08 23-09-59.png?raw=true "log2")
+
 
 ## Supplement
 In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
