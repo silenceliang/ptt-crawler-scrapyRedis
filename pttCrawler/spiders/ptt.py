@@ -1,6 +1,6 @@
 import scrapy
 from scrapy_redis.spiders import RedisSpider
-from scrapy.exceptions import CloseSpider
+from scrapy.exceptions import CloseSpider,DontCloseSpider
 from scrapy.http import Request
 from pttCrawler.items import PostItem, AuthorItem, CommentItem
 from datetime import datetime
@@ -173,4 +173,7 @@ class PTTspider(RedisSpider):
                         dont_filter = True)
                 else: # there is no following page, we stop the spider and wait for a new request   
                     logging.error('Without the next page')
-                    raise CloseSpider('page_exceeded')
+                    # running endleless
+                    raise DontCloseSpider('page_exceeded')
+                    # close the spider
+                    # raise CloseSpider('page_exceeded')

@@ -1,0 +1,10 @@
+Date: Sun, 08 Mar 2020 15:36:34 GMT
+Content-Type: text/html; charset=utf-8
+Alternate-Protocol: 443:npn-spdy/3
+Strict-Transport-Security: max-age=0
+Cf-Cache-Status: DYNAMIC
+Expect-Ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+X-Content-Type-Options: nosniff
+Server: cloudflare
+Cf-Ray: 570da1f03f17f8cf-NRT
+Content-Encoding: gzip
