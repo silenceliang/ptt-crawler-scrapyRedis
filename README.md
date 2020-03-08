@@ -267,13 +267,12 @@ scrapydweb
 ```
 We can get in from `localhost:5000` and monitor our crawler.
 
-![monitor1](/assets/img/Screenshot%from%2020-03-08%23-15-49.png?raw=true "web UI")
+![monitor1](/assets/img/Screenshot%20from%2020-03-08%23-15-49.png?raw=true "web UI")
 
 Also, we can track the crawler in here.
-![monitor2](/assets/img/Screenshot%from%2020-03-08%23-09-23.png?raw=true "log1")
+![monitor2](/assets/img/Screenshot%20from%2020-03-08%23-09-23.png?raw=true "log1")
 
-![monitor3](/assets/img/Screenshot%from%2020-03-08%23-09-59.png?raw=true "log2")
-
+![monitor3](/assets/img/Screenshot%20from%2020-03-08%23-09-59.png?raw=true "log2")
 
 ## Supplement
 In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
