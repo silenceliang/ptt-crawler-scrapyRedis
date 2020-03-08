@@ -10,8 +10,7 @@
 - **scrapyd-client 1.1.0** (used to deploy our spider)
 
 ## SnapShot
-
-
+![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
 ## Schema design
 
