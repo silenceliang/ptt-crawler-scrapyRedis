@@ -1,9 +1,43 @@
 # pttCrawler
 In this project we try to collect data from the ptt website. We adopt scrapy framework based on python language and use mongoDB as our storage. However, crawler handles it job only on single machine. To explore efficently, scrapy-redis provides distributed mechanism that helps us running spider on clients. For the purpose of deployment, we use scrapyd to achieve it. 
+- [pttCrawler](#pttcrawler)
+  * [Dependencies](#dependencies)
+  * [Requirements](#requirements)
+  * [Usage](#usage)
+    + [Running spider by following command:](#running-spider-by-following-command-)
+    + [Start the redis server and get in terminal](#start-the-redis-server-and-get-in-terminal)
+    + [Before crawling, we need to obtain the authentication by specific keyword](#before-crawling--we-need-to-obtain-the-authentication-by-specific-keyword)
+    + [Push url to redis and running Crawler](#push-url-to-redis-and-running-crawler)
+  * [SnapShot](#snapshot)
+    + [Result in db](#result-in-db)
+    + [Terminal example](#terminal-example)
+  * [Collections](#collections)
+    + [Post](#post)
+    + [Author](#author)
+    + [Comment](#comment)
+  * [Scrapy-Redis Framework](#scrapy-redis-framework)
+    + [Distributed crawler](#distributed-crawler)
+    + [Benefits](#benefits)
+      - [filter dumplicates](#filter-dumplicates)
+      - [scheduler persist](#scheduler-persist)
+    + [Deploy with scrapyd](#deploy-with-scrapyd)
+  * [Pipeline](#pipeline)
+    + [DuplicatesPipeline](#duplicatespipeline)
+    + [MongoPipeline](#mongopipeline)
+    + [JsonPipeline](#jsonpipeline)
+  * [Supplement](#supplement)
+  * [Reference](#reference)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 
 ## Dependencies
+Full dependency installation on Ubuntu 16.04
 - **Python 3** (tested on python 3.7.2)
-- **redis 3.4.1** (for cached memory)
+- **redis 3.4.1** 
+
+## Requirements
 - **pymongo 3.10.1** (used nosql db)
 - **Scrapy 2.0.0** (framework of crawler)
 - **scrapy-redis 0.6.8** (achieve distributed scrawling)
@@ -12,25 +46,25 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
 
 ## Usage
 
-### 0) running spider by following command: 
+### Running spider by following command: 
 ```bash
 scrapy crawl ptt -a start={m/d} -a end={m/d}
 ```
 * where `-a` received an argument that is a parameter to the spider.<br>
 * `{m/d}` means **month/day**. 3/5 just represents March 5th.<br> For example, the command would be `scrapy crawl ptt -a start=3/5 -a end=3/8`
 
-### 1) Start the redis server and get in terminal
+### Start the redis server and get in terminal
 ```bash
 redis-cli
 ```
 
-### 2) Before crawling, we need to obtain the authentication by specific keyword 
+### Before crawling, we need to obtain the authentication by specific keyword 
 ```bash
 auth yourpassword
 ```
 * where yourpassword is in `setting.py` and it can be modified directly.
 
-### 3) Push url to redis and running Crawler
+### Push url to redis and running Crawler
 ```bash
 lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ```
@@ -38,10 +72,10 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 
 ## SnapShot
 
-### Result
+### Result in db
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
-### terminal
+### Terminal example
 ![terminal setup](/assets/img/Screenshot%20from%202020-03-08%2015-23-32.png?raw=true "terminal")
 
 
@@ -76,7 +110,7 @@ There are three collections in mongoDB:
 | commentContent | the content in comment |
 | board | what comment belong with in ptt |
 
-**Note**: where schema prefix * represents primary key
+**Note**: where schema prefix * represents primary key.
 
 ----
 
@@ -175,4 +209,4 @@ class PTTspider(RedisSpider):
 * jianshu personal note: https://www.jianshu.com/p/8a9176d11372
 * SCUTJcfeng 's github: https://github.com/SCUTJcfeng/Scrapy-redis-Projects
 * ptt website C_Chat board: https://www.ptt.cc/bbs/C_Chat/index.html
-* http://www.q2zy.com/articles/2015/12/15/note-of-scrapy/
+* ripples's markdown: http://www.q2zy.com/articles/2015/12/15/note-of-scrapy/
