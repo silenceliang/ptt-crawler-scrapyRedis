@@ -154,3 +154,25 @@ def process_item(self, item, spider):
 ### JsonPipeline
 > generate a json file.
 
+## Supplement
+In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in in 2020 year, just like below:
+```python
+class PTTspider(RedisSpider):
+    configure_logging(install_root_handler=False) 
+    logging.basicConfig ( 
+        filename = 'logging.txt', 
+        format = '%(levelname)s: %(message)s', 
+        level = logging.INFO)
+    name = 'ptt'
+    redis_key = 'ptt:start_urls'
+    board = None
+    year = 200
+```
+
+## Reference
+* scrapy api: https://scrapy.readthedocs.io/en/0.12/index.html
+* scrapy-redis api: https://scrapy-redis.readthedocs.io/en/v0.6.1/readme.html
+* jianshu personal note: https://www.jianshu.com/p/8a9176d11372
+* SCUTJcfeng 's github: https://github.com/SCUTJcfeng/Scrapy-redis-Projects
+* ptt website C_Chat board: https://www.ptt.cc/bbs/C_Chat/index.html
+* http://www.q2zy.com/articles/2015/12/15/note-of-scrapy/
