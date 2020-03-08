@@ -18,7 +18,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
   * [Scrapy-Redis Framework](#scrapy-redis-framework)
     + [Distributed crawler](#distributed-crawler)
     + [Benefits](#benefits)
-      - [filter dumplicates](#filter-dumplicates)
+      - [filter duplicates](#filter-duplicates)
       - [scheduler persist](#scheduler-persist)
     + [Deploy with scrapyd](#deploy-with-scrapyd)
   * [Pipeline](#pipeline)
@@ -135,7 +135,7 @@ scrapy crawl pttCrawl
 
 ### Benefits
 
-#### filter dumplicates
+#### filter duplicates
 In `setting.py`, we just add a line that would prevent from repetitive redirection:
 ```
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
@@ -159,7 +159,7 @@ scrapyd-deploy pttCrawler
 
 ## Pipeline
 ### DuplicatesPipeline
-> In case of dumplicates in database, we filter the data here.
+> In case of duplicates in database, we filter the data here.
 ```python
 def process_item(self, item, spider):
 
