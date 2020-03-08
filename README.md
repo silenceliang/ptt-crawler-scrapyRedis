@@ -28,10 +28,6 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
   * [Supplement](#supplement)
   * [Reference](#reference)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-
 ## Dependencies
 Full dependency installation on Ubuntu 16.04
 - **Python 3** (tested on python 3.7.2)
