@@ -7,7 +7,7 @@
 ### Post
 | schema | Description |
 | --- | --- |
-| canonicalUrl | url where the page visited |
+| *canonicalUrl | url where the page visited |
 | authorId | who post the article |
 | title | title in the article |
 | content | content in the article |
@@ -17,7 +17,7 @@
 ### Author
 | schema | Description |
 | --- | --- |
-| authorId | who post the article |
+| *authorId | who post the article |
 | authorName | the author's nickname |
 
 ### Comment
@@ -26,6 +26,7 @@
 | commentId |  who post the conmment |
 | commentTime | when user posted |
 | commentContent | the content in comment |
+
 **Note**: where schema prefix $^*$ represents primary key
 
 ## Scrapy-Redis Framework
