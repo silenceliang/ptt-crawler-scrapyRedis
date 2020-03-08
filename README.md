@@ -185,7 +185,10 @@ def process_item(self, item, spider):
 > generate a json file.
 
 ## Supplement
-In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in in 2020 year, just like below:
+
+In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
+Also, we set `maximum_missing_count` as 500 where aims to control the bound of exploring articles. If there has been no page can be visited or got the limit of our missing count, we then stop crawling and wait for the next request.
+
 ```python
 class PTTspider(RedisSpider):
     configure_logging(install_root_handler=False) 
@@ -197,6 +200,7 @@ class PTTspider(RedisSpider):
     redis_key = 'ptt:start_urls'
     board = None
     year = 200
+    maximum_missing_count = 500
 ```
 
 ## Reference
