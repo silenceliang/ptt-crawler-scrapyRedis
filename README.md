@@ -25,6 +25,8 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [DuplicatesPipeline](#duplicatespipeline)
     + [MongoPipeline](#mongopipeline)
     + [JsonPipeline](#jsonpipeline)
+  * [Security-Methodology](#Security-Methodology)
+  
   * [Supplement](#supplement)
   * [Reference](#reference)
 
@@ -184,8 +186,20 @@ def process_item(self, item, spider):
 ### JsonPipeline
 > generate a json file.
 
-## Supplement
+## Security Methodology
+To avoid getting banned, we adopt some tricks while we are crawling web pages.
+1. **Download delays**
+We set the `DOWLOAD_DELAY` in `setting.py` to limit the dowmload behavior. 
 
+2. **Distrbuted downloader**
+scrapy-redis has already helped us indeed.
+
+3. **User Agent Pool**
+Randomly choose one user-agent through middleware. 
+
+**Note**: we cannot disable cookies because we have to pass the 'over18' message to some ptt boards. 
+
+## Supplement
 In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
 Also, we set `maximum_missing_count` as 500 where aims to control the bound of exploring articles. If there has been no page can be visited or got the limit of our missing count, we then stop crawling so that waste less resource.
 
