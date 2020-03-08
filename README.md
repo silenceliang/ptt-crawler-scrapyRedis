@@ -300,3 +300,4 @@ class PTTspider(RedisSpider):
 * SCUTJcfeng 's github: https://github.com/SCUTJcfeng/Scrapy-redis-Projects
 * ptt website C_Chat board: https://www.ptt.cc/bbs/C_Chat/index.html
 * ripples's markdown: http://www.q2zy.com/articles/2015/12/15/note-of-scrapy/
+* my8100 scrapywebUI: https://iter01.com/149794.html
