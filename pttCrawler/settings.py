@@ -82,9 +82,9 @@ REDIS_PORT = 6379
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'pttCrawler.pipelines.JsonPipeline': 500,
-    'pttCrawler.pipelines.MongoPipeline': 400,
     'pttCrawler.pipelines.DuplicatesPipeline':300,
+    'pttCrawler.pipelines.JsonPipeline': 400,
+    'pttCrawler.pipelines.MongoPipeline': 500,
 }
 
 MONGO_URI = 'mongodb://localhost:27017'

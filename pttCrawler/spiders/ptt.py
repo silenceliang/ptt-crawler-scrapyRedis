@@ -1,10 +1,10 @@
-from pttCrawler.items import PostItem, AuthorItem, CommentItem
 import scrapy
-import time, datetime, logging
 from scrapy_redis.spiders import RedisSpider
 from scrapy.utils.log import configure_logging  
 from scrapy.exceptions import CloseSpider
+from pttCrawler.items import PostItem, AuthorItem, CommentItem
 from datetime import datetime
+import time, datetime, logging
 
 '''
 Scrapy >> Spider >> RedisSpider
