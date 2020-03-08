@@ -29,7 +29,7 @@ UserAgentList = [
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 2
+# DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -65,6 +65,10 @@ REDIS_PORT = 6379
 # REDIS_URL = 'redis://root:123456@ip:6379'
 # REDIS_PORT = 6379
 
+# If we encounter following http code, we retry to visit until over 10 times
+RETRY_TIMES = 10
+RETRY_HTTP_CODES = [500,502,503,504,522,524,408,429,520]
+
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
@@ -80,9 +84,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
@@ -110,8 +114,18 @@ MONGO_DATABASE = 'ptt-sandbox'
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
-#HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 0
+HTTPCACHE_DIR = 'httpcache'
+HTTPCACHE_IGNORE_HTTP_CODES = [520]
+HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+## Notify user by email
+mail_settings = {
+    'MAIL_FROM' : 'scrapy@localhost',
+    'MAIL_HOST' : 'localhost',
+    'MAIL_PORT' : 25,
+    'MAIL_USER' : None,
+    'MAIL_PASS' : None
+}
+

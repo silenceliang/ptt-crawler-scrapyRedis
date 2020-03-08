@@ -1,0 +1,58 @@
+2020-03-08 23:00:04 [scrapy.utils.log] INFO: Scrapy 2.0.0 started (bot: pttCrawler)
+2020-03-08 23:00:04 [scrapy.utils.log] INFO: Versions: lxml 4.5.0.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 19.10.0, Python 3.7.2 (default, Mar  3 2020, 17:54:21) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-88-generic-x86_64-with-debian-stretch-sid
+2020-03-08 23:00:04 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.epollreactor.EPollReactor
+2020-03-08 23:00:04 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'pttCrawler',
+ 'CLOSESPIDER_PAGECOUNT': '10',
+ 'CLOSESPIDER_TIMEOUT': '60',
+ 'DUPEFILTER_CLASS': 'scrapy_redis.dupefilter.RFPDupeFilter',
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'HTTPCACHE_ENABLED': True,
+ 'HTTPCACHE_IGNORE_HTTP_CODES': [520],
+ 'LOG_FILE': 'logs/pttCrawler/ptt/task_1_2020-03-08T23_00_00.log',
+ 'NEWSPIDER_MODULE': 'pttCrawler.spiders',
+ 'RETRY_HTTP_CODES': [500, 502, 503, 504, 522, 524, 408, 429, 520],
+ 'RETRY_TIMES': 10,
+ 'SCHEDULER': 'scrapy_redis.scheduler.Scheduler',
+ 'SPIDER_MODULES': ['pttCrawler.spiders'],
+ 'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 '
+               '(KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'}
+2020-03-08 23:00:04 [scrapy.extensions.telnet] INFO: Telnet Password: 037148e4a7be32bd
+2020-03-08 23:00:04 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.closespider.CloseSpider',
+ 'scrapy.extensions.logstats.LogStats']
+2020-03-08 23:00:04 [twisted] CRITICAL: Unhandled error in Deferred:
+2020-03-08 23:00:04 [twisted] CRITICAL: Unhandled error in Deferred:
+2020-03-08 23:00:04 [twisted] CRITICAL: 
+Traceback (most recent call last):
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/twisted/internet/defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/crawler.py", line 88, in crawl
+    self.spider = self._create_spider(*args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/crawler.py", line 100, in _create_spider
+    return self.spidercls.from_crawler(self, *args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy_redis/spiders.py", line 153, in from_crawler
+    obj = super(RedisSpider, self).from_crawler(crawler, *args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/spiders/__init__.py", line 49, in from_crawler
+    spider = cls(*args, **kwargs)
+  File "/home/silence/project-aotter/pttCrawler/pttCrawler/spiders/ptt.py", line 27, in __init__
+    m_d_start = [int(x) for x in start.split('/')]
+AttributeError: 'NoneType' object has no attribute 'split'
+2020-03-08 23:00:04 [twisted] CRITICAL: 
+Traceback (most recent call last):
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/twisted/internet/defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/crawler.py", line 88, in crawl
+    self.spider = self._create_spider(*args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/crawler.py", line 100, in _create_spider
+    return self.spidercls.from_crawler(self, *args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy_redis/spiders.py", line 153, in from_crawler
+    obj = super(RedisSpider, self).from_crawler(crawler, *args, **kwargs)
+  File "/home/silence/.pyenv/versions/3.7.2/envs/py3.7/lib/python3.7/site-packages/scrapy/spiders/__init__.py", line 49, in from_crawler
+    spider = cls(*args, **kwargs)
+  File "/home/silence/project-aotter/pttCrawler/pttCrawler/spiders/ptt.py", line 27, in __init__
+    m_d_start = [int(x) for x in start.split('/')]
+AttributeError: 'NoneType' object has no attribute 'split'

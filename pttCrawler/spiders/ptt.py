@@ -1,11 +1,10 @@
 import scrapy
 from scrapy_redis.spiders import RedisSpider
-from scrapy.utils.log import configure_logging  
 from scrapy.exceptions import CloseSpider
+from scrapy.http import Request
 from pttCrawler.items import PostItem, AuthorItem, CommentItem
 from datetime import datetime
 import time, logging
-from scrapy.http import Request
 
 '''
 Scrapy >> Spider >> RedisSpider
@@ -13,12 +12,6 @@ RedisSpider rewrite `from_crawler()` in Spider class
 '''
 
 class PTTspider(RedisSpider):
-    # log initialize
-    configure_logging(install_root_handler=False) 
-    logging.basicConfig ( 
-        filename = 'logging.txt', 
-        format = '%(levelname)s: %(message)s', 
-        level = logging.INFO)
 
     '''
     If queue is empty, then waits
