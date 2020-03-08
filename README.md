@@ -36,7 +36,6 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ```
 * where `{board}` can be described Soft_Job, Gossiping or etc.
 
-
 ## SnapShot
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
@@ -45,8 +44,6 @@ There are three collections in mongoDB:
 * Post
 * Author
 * Comment
-
-----
 
 ### Post
 | schema | Description |
@@ -113,7 +110,7 @@ In `setting.py`, we just add a line that can keep tracking processes of the craw
 SCHEDULER_PERSIST = True
 ```
 
-### Deploy to scrapyd
+### Deploy with scrapyd
 1. scrapyd provide a daemon for crawling. Like http server, we run it by typing the following command:
 ```bash
 scrapyd
@@ -125,7 +122,7 @@ scrapyd-deploy pttCrawler
 ```
 
 ## Pipeline
-* DuplicatesPipeline
+### DuplicatesPipeline
 > In case of dumplicates in database, we filter the data here.
 ```python
 def process_item(self, item, spider):
@@ -145,10 +142,9 @@ def process_item(self, item, spider):
     return item
 ```
 
-* MongoPipeline
+### MongoPipeline
 > save data in mongodb. 
 
-
-* JsonPipeline
+### JsonPipeline
 > generate a json file.
 
