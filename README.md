@@ -5,23 +5,27 @@
 ## Schema design
 
 ### Post
-* *canonicalUrl
-* authorId
-* title
-* publishedTime
-* content
-* createdTime
-* updateTime
+| schema | Description |
+| --- | --- |
+| canonicalUrl | url where the page visited |
+| authorId | who post the article |
+| title | title in the article |
+| content | content in the article |
+| publishedTime | the date this post was created |
+| updateTime | the date this post was updated |
 
 ### Author
-* *authorId
-* authorName
+| schema | Description |
+| --- | --- |
+| authorId | who post the article |
+| authorName | the author's nickname |
 
 ### Comment
-* commentId
-* commentTime
-* commentContent
-
+| schema | Description |
+| --- | --- |
+| commentId |  who post the conmment |
+| commentTime | when user posted |
+| commentContent | the content in comment |
 **Note**: where schema prefix $^*$ represents primary key
 
 ## Scrapy-Redis Framework
