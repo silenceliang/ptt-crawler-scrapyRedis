@@ -16,7 +16,10 @@ FEED_EXPORT_ENCODING = 'utf-8'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'pttCrawler (+http://www.yourdomain.com)'
-
+UserAgentList = [
+    'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1500.55 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17'
+]
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = False
 
@@ -26,7 +29,7 @@ FEED_EXPORT_ENCODING = 'utf-8'
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -70,9 +73,10 @@ REDIS_PORT = 6379
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'pttCrawler.middlewares.PttcrawlerDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+#    pttCrawler.middlewares.PttcrawlerDownloaderMiddleware': 543,
+    'pttCrawler.middlewares.RandomUserAgentMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
