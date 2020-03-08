@@ -17,7 +17,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
 scrapy crawl ptt -a start={m/d} -a end={m/d}
 ```
 * where `-a` received an argument that is a parameter to the spider.<br>
-* {m/d} means **month / day** such as 3/5, which is March 5th.<br> For example, the command would be `scrapy crawl ptt -a start=3/5 -a end=3/8`
+* `{m/d}` means **month/day**. 3/5 just represents March 5th.<br> For example, the command would be `scrapy crawl ptt -a start=3/5 -a end=3/8`
 
 ### 1) Start the redis server and get in terminal
 ```bash
@@ -34,7 +34,7 @@ auth yourpassword
 ```bash
 lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ```
-* where {board} can be described Soft_Job, Gossiping or etc.
+* where `{board}` can be described Soft_Job, Gossiping or etc.
 
 
 ## SnapShot
