@@ -5,6 +5,7 @@ from scrapy.exceptions import CloseSpider
 from pttCrawler.items import PostItem, AuthorItem, CommentItem
 from datetime import datetime
 import time, logging
+from scrapy.http import Request
 
 '''
 Scrapy >> Spider >> RedisSpider
@@ -37,14 +38,19 @@ class PTTspider(RedisSpider):
         super(PTTspider, self).__init__(*args, **kwargs)
         logging.debug('\n\nCrawling articles from  {} to {}\n\n.'.format(start, end))
 
+    def make_requests_from_url(self, url):
+        return Request(url,
+            cookies={'over18':1}, # To collect data from sex or Gossiping board.
+            headers={'User-Agent':'Mozilla/5.0'},
+            dont_filter = True)
+
     def parse(self, response):
         logging.info('Crawling first page, we crawl the index of ptt: {}'.format(response.request.url))
-        # e.g., response.request.url = https://www.ptt.cc/bbs/Soft_Job/index.html
+        # e.g., response.request.url = https://www.ptt.cc/bbs/Soft_Jobs/index.html
         
         self.board = response.request.url.split('/')[-2]
-
+        
         yield scrapy.Request(response.request.url, 
-            cookies={'over18':1}, # To collect data from sex or Gossiping board.
             callback=self.parse_article,
             dont_filter = True) 
 
@@ -96,6 +102,7 @@ class PTTspider(RedisSpider):
 
     def parse_article(self, response):
         # create a post-object to store results
+
         post_item = PostItem()
         post_item['board'] = self.board
         # create a author-object to store results
@@ -122,7 +129,6 @@ class PTTspider(RedisSpider):
                     url = response.urljoin(next_page.extract())
                     logging.warning('redirect to following {}'.format(url))
                     yield scrapy.Request(url,
-                        cookies={'over18':1},
                         callback=self.parse_article,
                         dont_filter = True
                         )
@@ -170,7 +176,6 @@ class PTTspider(RedisSpider):
                     url = response.urljoin(next_page.extract())
                     logging.warning('redirect to following {}'.format(url))
                     yield scrapy.Request(url,
-                        cookies={'over18':1},
                         callback=self.parse_article,
                         dont_filter = True)
                 else: # there is no following page, we stop the spider and wait for a new request   
