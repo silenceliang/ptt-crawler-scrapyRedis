@@ -108,6 +108,11 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ### Terminal example
 ![terminal setup](/assets/img/Screenshot%20from%202020-03-08%2015-23-32.png?raw=true "terminal")
 
+### Workflow in local
+#### Run `redis-cli`
+![terminal1](/assets/img/Screenshot%20from%202020-03-09%2023-50-41.png?raw=true "terminal1")
+#### Run `scrapy crawl ptt -a start={date} -a end={date}`
+![terminal2](/assets/img/Screenshot%20from%202020-03-09%2023-55-18.png?raw=true "terminal2")
 
 ## Collections 
 There are three collections in mongoDB:
@@ -281,6 +286,8 @@ An open source and collaborative framework for extracting the data you need from
 ### Scrapyd
 Scrapy comes with a built-in service, called “Scrapyd”, which allows you to deploy (aka. upload) your projects and control their spiders
 using a JSON web service.
+![scrapyd](/assets/img/Screenshot%20from%202020-03-09%2023-36-01.png?raw=true "scrapyd")
+![scrapyd-terminal](/assets/img/Screenshot%20from%202020-03-09%2023-37-29.png?raw=true "scrapyd-terminal")
 ### Scrapydweb
 A full-featured web UI for Scrapyd cluster management, with Scrapy log analysis & visualization supported.
 
