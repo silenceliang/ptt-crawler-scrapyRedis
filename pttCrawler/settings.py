@@ -56,6 +56,8 @@ DUPEFILTER_DEBUG = True
 SCHEDULER_PERSIST = True
 
 REDIS_HOST = 'localhost'
+# if pack to docker
+# REDIS_HOST = 'redis'
 REDIS_PARAMS = {
     'password':'yourpassword'
 }

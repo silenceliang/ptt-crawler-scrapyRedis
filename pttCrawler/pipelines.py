@@ -79,9 +79,9 @@ class JsonPipeline(object):
         self.com_exporter.finish_exporting()
         self.aut_exporter.finish_exporting()
         
-        self.author.close()
         self.article.close()
         self.comment.close()
+        self.author.close()
 
     def process_item(self, item, spider):
         

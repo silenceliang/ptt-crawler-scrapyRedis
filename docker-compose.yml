@@ -1,0 +1,22 @@
+version: '3'
+services:
+ spider_app:
+  image: spider_app
+  volumes:
+   - .:/pttCrawler
+  ports:
+   - '6381:6800'
+  depends_on:
+   - redis
+
+ redis:
+  image: redis
+  command: redis-server --requirepass yourpassword
+  restart: always
+  ports:
+   - '6380:6379'
+ 
+# web_monitor:
+#  build: ./scrapyweb
+#  ports:
+#   - '6382:5000'

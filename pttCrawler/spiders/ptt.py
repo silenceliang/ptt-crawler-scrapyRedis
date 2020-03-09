@@ -24,10 +24,13 @@ class PTTspider(RedisSpider):
     maximum_missing_count = 500
     
     def __init__(self, start=None, end=None, *args, **kwargs):
-        m_d_start = [int(x) for x in start.split('/')]
-        m_d_end = [int(x) for x in end.split('/')]
-        self.start = datetime(self.year, m_d_start[0], m_d_start[1])
-        self.end = datetime(self.year, m_d_end[0], m_d_end[1])
+        try:
+            m_d_start = [int(x) for x in start.split('/')]
+            m_d_end = [int(x) for x in end.split('/')]
+            self.start = datetime(self.year, m_d_start[0], m_d_start[1])
+            self.end = datetime(self.year, m_d_end[0], m_d_end[1])
+        except:
+            logging.error('you have to pass arguments: start and end')
         super(PTTspider, self).__init__(*args, **kwargs)
         logging.debug('\n\nCrawling articles from  {} to {}\n\n.'.format(start, end))
 
@@ -173,7 +176,7 @@ class PTTspider(RedisSpider):
                         dont_filter = True)
                 else: # there is no following page, we stop the spider and wait for a new request   
                     logging.error('Without the next page')
-                    # running endleless
+                    # running endless
                     raise DontCloseSpider('page_exceeded')
                     # close the spider
                     # raise CloseSpider('page_exceeded')

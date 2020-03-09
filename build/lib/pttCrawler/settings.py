@@ -55,7 +55,7 @@ DUPEFILTER_DEBUG = True
 
 SCHEDULER_PERSIST = True
 
-REDIS_HOST = 'localhost'
+REDIS_HOST = 'redis'
 REDIS_PARAMS = {
     'password':'yourpassword'
 }
