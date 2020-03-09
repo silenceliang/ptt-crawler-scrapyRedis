@@ -1,7 +1,7 @@
 # pttCrawler
 In this project we try to collect data from the ptt website. We adopt scrapy framework based on python language and use mongoDB as our storage. However, crawler handles it job only on single machine. To explore efficently, scrapy-redis provides distributed mechanism that helps us running spider on clients. For the purpose of deployment, we use scrapyd to achieve it. 
 
--[pttCrawler](#pttcrawler)
+- [pttCrawler](#pttcrawler)
   * [Dependencies](#dependencies)
   * [Requirements](#requirements)
   * [Setup](#setup)
@@ -16,6 +16,9 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
   * [SnapShot](#snapshot)
     + [Result in db](#result-in-db)
     + [Terminal example](#terminal-example)
+    + [Workflow in local](#workflow-in-local)
+      - [Run `redis-cli`](#run--redis-cli-)
+      - [Run `scrapy crawl ptt -a start={date} -a end={date}`](#run--scrapy-crawl-ptt--a-start--date---a-end--date--)
   * [Collections](#collections)
     + [Post](#post)
     + [Author](#author)
@@ -31,10 +34,14 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [MongoPipeline](#mongopipeline)
     + [JsonPipeline](#jsonpipeline)
   * [Security Methodology](#security-methodology)
-  * [Web UI for scrapyd server](#Web-UI-for-scrapyd-server)
-  *[Deployment](#Deployment)
+  * [Web UI for scrapyd server](#web-ui-for-scrapyd-server)
+  * [Deployment](#deployment)
+    + [Scrapy](#scrapy)
+    + [Scrapyd](#scrapyd)
+    + [Scrapydweb](#scrapydweb)
   * [Supplement](#supplement)
   * [Reference](#reference)
+
 
 ## Dependencies
 Full dependency installation on Ubuntu 16.04
