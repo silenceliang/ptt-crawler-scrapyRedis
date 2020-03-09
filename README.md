@@ -32,6 +32,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [JsonPipeline](#jsonpipeline)
   * [Security Methodology](#security-methodology)
   * [Web UI for scrapyd server](#Web-UI-for-scrapyd-server)
+  *[Deployment](#Deployment)
   * [Supplement](#supplement)
   * [Reference](#reference)
 
@@ -39,6 +40,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
 Full dependency installation on Ubuntu 16.04
 - **Python 3** (tested on python 3.7.2)
 - **redis 3.4.1** 
+- **mongodb 4.0.16**
 
 ## Requirements
 - **pymongo==3.10.1** (used nosql db)
@@ -212,7 +214,6 @@ def process_item(self, item, spider):
 
     return item
 ```
-
 ### MongoPipeline
 > save data in mongodb. 
 
@@ -272,6 +273,16 @@ We can get in from `localhost:5000` and monitor our crawler.
 Also, we can track the crawler in here.
 ![monitor2](/assets/img/Screenshot%20from%202020-03-08%2023-09-23.png?raw=true "log1")
 ![monitor3](/assets/img/Screenshot%20from%202020-03-08%2023-09-59.png?raw=true "log2")
+
+## Deployment
+
+### Scrapy
+An open source and collaborative framework for extracting the data you need from websites. In a fast, simple, yet extensible way.
+### Scrapyd
+Scrapy comes with a built-in service, called “Scrapyd”, which allows you to deploy (aka. upload) your projects and control their spiders
+using a JSON web service.
+### Scrapydweb
+A full-featured web UI for Scrapyd cluster management, with Scrapy log analysis & visualization supported.
 
 
 ## Supplement
