@@ -286,8 +286,8 @@ Also, we can track the crawler in here.
 ## Deployment
 
 ### Scrapyd
-Scrapy comes with a built-in service, called "Scrapyd", which allows you to deploy your projects and control their spiders
-**using a JSON web service**.
+Scrapy comes with a built-in service, called "Scrapyd", which allows you to deploy your projects and control their spiders **using a JSON web service**.
+
 ![scrapyd](/assets/img/Screenshot%20from%202020-03-09%2023-36-01.png?raw=true "scrapyd")
 
 ![scrapyd-terminal](/assets/img/Screenshot%20from%202020-03-09%2023-37-29.png?raw=true "scrapyd-terminal")
