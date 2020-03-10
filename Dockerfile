@@ -13,8 +13,6 @@ RUN pip install -r requirements.txt
 # allow anyone to connect
 COPY default_scrapyd.conf /usr/local/lib/python3.7/site-packages/scrapyd/default_scrapyd.conf
 
-CMD ["scrapyd"]
+#CMD ["scrapyd"]
 
-EXPOSE 6800
-
-# CMD ["scrapy", "crawl", "ptt", "-a", "start=3/5", "-a", "end=3/6"]
+CMD ["scrapy", "crawl", "ptt", "-a", "start=3/5", "-a", "end=3/6"]
