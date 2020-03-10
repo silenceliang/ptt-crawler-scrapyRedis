@@ -36,12 +36,13 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
   * [Security Methodology](#security-methodology)
   * [Web UI for scrapyd server](#web-ui-for-scrapyd-server)
   * [Deployment](#deployment)
-    + [Scrapy](#scrapy)
     + [Scrapyd](#scrapyd)
     + [Scrapydweb](#scrapydweb)
+    + [docker-compose](#docker-compose)
+      - [container](#container)
+      - [memo](#memo)
   * [Supplement](#supplement)
   * [Reference](#reference)
-
 
 ## Dependencies
 Full dependency installation on Ubuntu 16.04
@@ -288,16 +289,38 @@ Also, we can track the crawler in here.
 
 ## Deployment
 
-### Scrapy
-An open source and collaborative framework for extracting the data you need from websites. In a fast, simple, yet extensible way.
 ### Scrapyd
-Scrapy comes with a built-in service, called “Scrapyd”, which allows you to deploy (aka. upload) your projects and control their spiders
-using a JSON web service.
+Scrapy comes with a built-in service, called "Scrapyd", which allows you to deploy your projects and control their spiders
+**using a JSON web service**.
 ![scrapyd](/assets/img/Screenshot%20from%202020-03-09%2023-36-01.png?raw=true "scrapyd")
+
 ![scrapyd-terminal](/assets/img/Screenshot%20from%202020-03-09%2023-37-29.png?raw=true "scrapyd-terminal")
+
 ### Scrapydweb
 A full-featured web UI for Scrapyd cluster management, with Scrapy log analysis & visualization supported.
 
+### docker-compose
+#### container
+* Spider_app (scrapy-redis)
+* Redis
+* mongoDB
+
+#### memo
+Before deploy to docker, we need to modify a little parts in  `settings.py` :
+```python
+# local
+# MONGO_URI = 'mongodb://localhost:27017'
+# docker
+MONGO_URI = 'mongodb://mongodb:27017'
+
+# local
+# REDIS_HOST = 'localhost'
+# docker
+REDIS_HOST = 'redis'
+```
+Since the docker seems the service defined at `.yml` as server host, we modify `localhost` here.
+
+![docker-terminal](/assets/img/Screenshot%20from%202020-03-10%2015-17-53.png?raw=true "docker-terminal")
 
 ## Supplement
 In the main spider script `ptt.py`, for the sake of convenience we restrict the date stuck in year 2020.<br>
