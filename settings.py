@@ -55,9 +55,8 @@ DUPEFILTER_DEBUG = True
 
 SCHEDULER_PERSIST = True
 
-# local
 # REDIS_HOST = 'localhost'
-# docker
+# if pack to docker
 REDIS_HOST = 'redis'
 REDIS_PARAMS = {
     'password':'yourpassword'
@@ -99,11 +98,8 @@ ITEM_PIPELINES = {
     'pttCrawler.pipelines.MongoPipeline': 500,
 }
 
-## MONGODB settings
-# local
-# MONGO_URI = 'mongodb://localhost:27017'
-# docker
-MONGO_URI = 'mongodb://mongodb:27017'
+## MONGODB settings:
+MONGO_URI = 'mongodb://60a7210eb6b3:27017'
 MONGO_DATABASE = 'ptt-sandbox'
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -2,12 +2,15 @@ version: '3'
 services:
  spider_app:
   image: spider_app
+  environment:
+   REDIS_HOST: redis
   volumes:
    - .:/pttCrawler
   ports:
    - '6381:6800'
   depends_on:
    - redis
+   - mongodb
 
  redis:
   image: redis
@@ -15,8 +18,13 @@ services:
   restart: always
   ports:
    - '6380:6379'
- 
-# web_monitor:
-#  build: ./scrapyweb
-#  ports:
-#   - '6382:5000'
+
+ mongodb:
+  image: sameersbn/mongodb:latest
+  ports:
+   - '6382:27017'
+  volumes:
+   - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:
+
