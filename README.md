@@ -15,8 +15,7 @@ In this project we try to collect data from the ptt website. We adopt scrapy fra
     + [Push url to redis and running Crawler](#push-url-to-redis-and-running-crawler)
   * [SnapShot](#snapshot)
     + [Result in db](#result-in-db)
-    + [Terminal example](#terminal-example)
-    + [Workflow in local](#workflow-in-local)
+    + [Workflow in the local](#workflow-in-the-local)
       - [Run `redis-cli`](#run--redis-cli-)
       - [Run `scrapy crawl ptt -a start={date} -a end={date}`](#run--scrapy-crawl-ptt--a-start--date---a-end--date--)
   * [Collections](#collections)
@@ -113,13 +112,10 @@ lpush ptt:start_urls https://www.ptt.cc/{board}/index.html
 ### Result in db
 ![post info](/assets/img/Screenshot%20from%202020-03-08%2013-23-04.png?raw=true "post item")
 
-### Terminal example
-![terminal setup](/assets/img/Screenshot%20from%202020-03-08%2015-23-32.png?raw=true "terminal")
-
-### Workflow in local
-#### Run `redis-cli`
+### Workflow in the local
+#### interaction with redis using `redis-cli`
 ![terminal1](/assets/img/Screenshot%20from%202020-03-09%2023-50-41.png?raw=true "terminal1")
-#### Run `scrapy crawl ptt -a start={date} -a end={date}`
+#### Run the crawler by `scrapy crawl ptt -a start={date} -a end={date}`
 ![terminal2](/assets/img/Screenshot%20from%202020-03-09%2023-55-18.png?raw=true "terminal2")
 
 ## Collections 
