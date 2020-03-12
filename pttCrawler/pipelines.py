@@ -16,7 +16,6 @@ class MongoPipeline(object):
     collection_post = 'post'
     collection_author = 'author'
     collection_comment = 'comment'
-    collection_header = 'header'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
