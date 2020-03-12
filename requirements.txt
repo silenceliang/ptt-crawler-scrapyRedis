@@ -21,6 +21,8 @@ queuelib==1.5.0
 redis==3.4.1
 Scrapy==2.0.0
 scrapy-redis==0.6.8
+scrapyd==1.2.1
+scrapyd-client==1.1.0
 service-identity==18.1.0
 six==1.14.0
 Twisted==19.10.0
