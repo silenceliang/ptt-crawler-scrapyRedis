@@ -16,6 +16,7 @@ class MongoPipeline(object):
     collection_post = 'post'
     collection_author = 'author'
     collection_comment = 'comment'
+    collection_header = 'header'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -103,7 +104,7 @@ class JsonPipeline(object):
             try:
                 item['authorName'] = match.group(0)[1:-1]
             except:
-                logging.error('This name cannot be update.')
+                logging.error('This name cannot be update')
             self.aut_exporter.export_item(item)
         
         return item

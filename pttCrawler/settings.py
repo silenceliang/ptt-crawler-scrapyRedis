@@ -14,6 +14,9 @@ SPIDER_MODULES = ['pttCrawler.spiders']
 NEWSPIDER_MODULE = 'pttCrawler.spiders'
 FEED_EXPORT_ENCODING = 'utf-8'
 
+# The limit amount of visited pages
+MAXIMUM_MISSING_COUNT = 500
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'pttCrawler (+http://www.yourdomain.com)'
 UserAgentList = [
@@ -52,16 +55,13 @@ SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
 # Ensure all spiders share same duplicates filter through redis
 DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
 DUPEFILTER_DEBUG = True
-
+# Whether to flush requests when closing.
 SCHEDULER_PERSIST = True
 
 # local
 # REDIS_HOST = 'localhost'
 # docker
 REDIS_HOST = 'redis'
-REDIS_PARAMS = {
-    'password':'yourpassword'
-}
 REDIS_PORT = 6379
 
 # slaver crawler settings
@@ -100,11 +100,11 @@ ITEM_PIPELINES = {
 }
 
 ## MONGODB settings
+MONGO_DATABASE = 'ptt-sandbox'
 # local
 # MONGO_URI = 'mongodb://localhost:27017'
 # docker
 MONGO_URI = 'mongodb://mongodb:27017'
-MONGO_DATABASE = 'ptt-sandbox'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -7,26 +7,23 @@
 
 import scrapy
 
-
 class PostItem(scrapy.Item):
+    canonicalUrl = scrapy.Field()
     authorId = scrapy.Field()
     title =  scrapy.Field()
-    publishedTime = scrapy.Field()
     content =scrapy.Field()
-    canonicalUrl = scrapy.Field()
+    publishedTime = scrapy.Field()
     createdTime = scrapy.Field()
-    updateTime = scrapy.Field()
     board = scrapy.Field()
-
 
 class AuthorItem(scrapy.Item):
     authorId = scrapy.Field()
     authorName = scrapy.Field()
 
 class CommentItem(scrapy.Item):
-    commentId = scrapy.Field()
+    commentId = scrapy.Field() # refer to post ID
+    canonicalUrl = scrapy.Field() # refer to author ID
     commentContent = scrapy.Field()
     commentTime = scrapy.Field()
-    board = scrapy.Field()
 
     
