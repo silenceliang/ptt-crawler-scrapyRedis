@@ -15,4 +15,6 @@ COPY default_scrapyd.conf /usr/local/lib/python3.7/site-packages/scrapyd/default
 
 #CMD ["scrapyd"]
 
-CMD ["scrapy", "crawl", "ptt", "-a", "start=3/5", "-a", "end=3/6"]
+ENTRYPOINT ["scrapy", "crawl"]
+
+CMD ["ptt", "-a", "start=3/5", "-a", "end=3/6"]

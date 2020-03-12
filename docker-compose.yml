@@ -1,21 +1,15 @@
 version: '3'
 services:
+ 
  spider_app:
-  image: spider_app
+  image: pttcrawler
   environment:
    REDIS_HOST: redis
-  volumes:
-   - .:/pttCrawler
   ports:
    - '6381:6800'
-  depends_on:
-   - redis
-   - mongodb
 
  redis:
   image: redis
-  command: redis-server --requirepass yourpassword
-  restart: always
   ports:
    - '6380:6379'
 
